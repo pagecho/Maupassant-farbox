@@ -1,0 +1,40 @@
+html
+	head
+		title FarBox Tempalte Engine
+		load('/template/clone-template.scss')
+		load('jquery')
+	body#clone
+		<iframe noresize="noresize" frameborder="0" src="/" id="barframe"></iframe>
+		#clone_template
+			div.clone_bar
+				label(for='site') Your Site Domain:
+				input#site(type="text")
+
+				.checkbox
+					input#auto_update(type="checkbox")
+					label Auto Update
+
+				a#redirect.button(href="#", onclick="clone_template();return false;") Clone Template
+				a#cancel.button(href="/") Cancel
+		script(type="text/javascript")
+			$(document).ready(function(){
+				$('#auto_update').mousedown(function() {
+				if (!$(this).is(':checked')) {
+					this.checked = confirm("If you select `Auto Upgrade`, make sure you trust the owner of the template!");
+					$(this).trigger("change");
+					}
+				});
+				$('#site').focus();
+
+			});
+
+			function clone_template(){
+				var domain = $.trim($('#site').val()).toLowerCase();
+				if (domain.indexOf('http://')==-1){
+					domain = 'http://' + domain;
+				}
+				var url = domain.replace(/\/$/g, '') + '/?template_site_id={{ site._id }}';
+				url += '&auto_update='+ $('#auto_update').is(':checked');
+				window.location.href = url;
+			}
+

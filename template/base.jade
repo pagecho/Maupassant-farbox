@@ -1,0 +1,56 @@
+html
+	+i18n('Home', '首页', 'zh_cn')
+	+i18n('Albums', '相册', 'zh_cn')
+	+i18n('Categories', '分类', 'zh_cn')
+	+i18n('Archive', '归档', 'zh_cn')
+	+i18n('Tags', '标签', 'zh_cn')
+	+i18n('About', '关于', 'zh_cn')
+	+i18n('Links', '友链', 'zh_cn')
+	head
+		meta(content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name="viewport")
+		meta(content="yes", name="apple-mobile-web-app-capable")
+		meta(content="black", name="apple-mobile-web-app-status-bar-style")
+		meta(content="telephone=no", name="format-detection")
+		meta(name="renderer", content="webkit")
+		meta(name="keywords", content=site.configs.keywords.escaped)
+		meta(name="description", content=site.raw_content.escaped)
+		block title
+			title= request.args.s or post.title or tags.join('+') or category.title or site.title
+		load('/template/style.scss')
+	body.clearfix
+		header#header.clearfix
+			.container
+				.col-group
+					.site-name
+						if request.path == '/'
+							h1= site.title
+						a#logo(href='/')= site.title
+						p.description= site.raw_content
+					nav#nav-menu.clearfix
+						<a href="/"  {% if request.path != '/about.md' and request.path != '/archive' %}class="current"{% endif %}>首页</a>
+						<a href="/archive"  {% if request.path == '/archive' %}class="current"{% endif %}>归档</a>
+						if has('images')
+							a(href='/album') Albums
+							if not has('posts')
+								+redirect('/album')
+						if has('links.md')
+			                <a href="/links.md" {% if request.path == '/links.md' %}class="current"{% endif %}>Links</a>
+						if has('about.md')
+			                <a href="/about.md" {% if request.path == '/about.md' %}class="current"{% endif %}>About</a>
+
+		section#layout
+			.container
+				.col-group
+					#main.col-8
+						.res-cons
+							block content
+
+					#secondary
+						include include/sider
+
+		footer#footer
+			.container= '© 2015 '
+				a(href='/', real="nofollow")= site.title
+				<br>
+				span= 'Powered by <a rel="nofollow" href="https://www.farbox.com">farbox</a>'
+		+load('jquery, /template/scripts.coffee')

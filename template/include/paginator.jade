@@ -1,0 +1,6 @@
+if paginator.has_pre or paginator.has_next
+	.page-navigator.clearfix
+		if paginator.has_pre
+			a.pre.rounde(href=paginator.pre_url) 上一页
+		if paginator.has_next
+			a.round.next(href=paginator.next_url) 下一页

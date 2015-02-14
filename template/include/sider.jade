@@ -1,0 +1,10 @@
+section.widget
+	form#search
+		input#search_value.text(placeholder="Search",type="text",value=request.args.s, onkeyup="if (event.keyCode == 13) search();")
+section.widget
+	.widget-title= '最新文章'
+	sideentries = get_data(path='/', type='post', limit=8, sort='desc', with_page=False)
+	ul
+		for post in sideentries
+			li
+				a(href=post.url, title=post.title)= post.title
