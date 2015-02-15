@@ -1,11 +1,4 @@
 html
-	+i18n('Home', '首页', 'zh_cn')
-	+i18n('Albums', '相册', 'zh_cn')
-	+i18n('Categories', '分类', 'zh_cn')
-	+i18n('Archive', '归档', 'zh_cn')
-	+i18n('Tags', '标签', 'zh_cn')
-	+i18n('About', '关于', 'zh_cn')
-	+i18n('Links', '友链', 'zh_cn')
 	head
 		meta(content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name="viewport")
 		meta(content="yes", name="apple-mobile-web-app-capable")
@@ -30,13 +23,13 @@ html
 						<a href="/"  {% if request.path != '/about.md' and request.path != '/archive' %}class="current"{% endif %}>首页</a>
 						<a href="/archive"  {% if request.path == '/archive' %}class="current"{% endif %}>归档</a>
 						if has('images')
-							a(href='/album') Albums
+							a(href='/album') 相册
 							if not has('posts')
 								+redirect('/album')
 						if has('links.md')
-			                <a href="/links.md" {% if request.path == '/links.md' %}class="current"{% endif %}>Links</a>
+			                <a href="/links.md" {% if request.path == '/links.md' %}class="current"{% endif %}>链接</a>
 						if has('about.md')
-			                <a href="/about.md" {% if request.path == '/about.md' %}class="current"{% endif %}>About</a>
+			                <a href="/about.md" {% if request.path == '/about.md' %}class="current"{% endif %}>关于</a>
 
 		section#layout
 			.container

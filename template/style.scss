@@ -193,6 +193,7 @@ textarea {
         color:#999;
         text-align:left;
         display: block;
+        text-indent: .15em;
     }
     .post-content{
         font-size: 15px;
@@ -216,10 +217,17 @@ textarea {
             a{
                 padding-bottom: 2px;
                 border-bottom: 1px solid #aaa;
+                word-break:break-all;
                 &:hover{
                     border-bottom-color:#444;
                 }
             }
+        }
+        hr{
+            margin:2.4em auto;
+            border:1px solid #ddd;
+            border-width:1px 0 0 0;
+            position: relative;
         }
         img{
             padding:1em 0;
