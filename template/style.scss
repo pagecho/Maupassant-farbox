@@ -200,6 +200,7 @@ textarea {
         line-height: 1.77;
         color:#444;
         padding-top:27px;
+        overflow: hidden;
         h2,h3{
             margin: 1.4em 0 1.1em;
         }
@@ -333,6 +334,9 @@ textarea {
     padding:.8em 0 3.6em;
     line-height:1.5;
     color:#999;
+    span{
+        font-size: .9em;
+    }
 }
 #categories{
     list-style: none;
@@ -435,7 +439,7 @@ textarea {
         padding:0.2em 0;
     }
     .post {
-        padding:12px 0;
+        padding:18px 0;
     }
     #header .col-group #nav-menu a{
         padding:0 15px;
