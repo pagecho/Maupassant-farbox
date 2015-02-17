@@ -9,7 +9,7 @@
 				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 			})();
 	elif site.configs.duoshuo
-		.ds-thread(data-thread-key=post.url_path,data-title=post.title,data-url='http://pagecho.com'+post.url)
+		.ds-thread(data-thread-key=post.url_path,data-title=post.title,data-url=request.base_url)
 		script(type="text/javascript")
 			var duoshuoQuery = {short_name:"{{ site.configs.duoshuo }}"};
 			(function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true;
