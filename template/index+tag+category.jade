@@ -1,33 +1,32 @@
-mixin make_posts(posts)
+extends base
+block title
+	title= request.args.s or tags.join('+') or category.title or site.title
+block content
+	// i18n starts
+	+_('reading_label', 'currently reading articles under <b>%s</b>')
+	+_('reading_label', '正在查看 <b>%s</b> 下的文章', 'zh_cn')
+	+_('search_label', 'post contains <b>%s</b>  found below')
+	+_('search_label', '搜索包含 <b>%s</b>  的结果', 'zh_cn')
+	// i18n ends
+	if request.path.strip('/') == 'category'
+		+redirect('/categories')
+	if request.path.strip('/') == 'tag'
+		+redirect('/tags')
+
+	if tags or category
+		h1.label-title=  _('reading_label') % (request.args.s or tags.join('+') or category.title)
+	if request.args.s
+		h1.label-title= _('search_label') % request.args.s
+	
 	for post in posts
-		article.post
-			header
-				h2.post-title
-					a(href=post.url)= post.title
-			date.post-meta= post.date.format('%B %d, %Y')
-			section.post-content= post.content.opening or post.content.limit(300)
+		.post
+			h2.post-title
+				a(href=post.url)= post.title
+			.post-meta= post.date.format('%B %d, %Y')
+			.post-content= post.content.opening or post.content.limit(300)
 			if post.tags
-				footer
-					.tags
-						for tag in post.tags
-							a(href="/tag/{{tag}}")= tag
-
-if request.args.pjax=='true'
-	+make_posts(posts)
-else
-	extends base
-	block title
-		title= request.args.s or tags.join('+') or category.title or site.title
-	block content
-		if request.path.strip('/') == 'category'
-			+redirect('/categories')
-		if request.path.strip('/') == 'tag'
-			+redirect('/tags')
-
-		if tags or category
-			h1.archive-title= '正在查看 '+(request.args.s or tags.join('+') or category.title or site.title)+' 下的文章'
-		if request.args.s != site.name
-			h1.archive-title= '搜索包含 ' + request.args.s + ' 的结果'
-		+make_posts(posts)
-		include include/paginator
-
+				.tags
+					for tag in post.tags
+						a(href="/tag/{{tag}}")= tag
+	
+	include include/paginator

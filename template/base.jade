@@ -1,48 +1,67 @@
 html
+	// i18n
+	+_('Blog', '博客', 'zh_cn')
+	+_('Albums', '相册', 'zh_cn')
+	+_('Categories', '分类', 'zh_cn')
+	+_('Archive', '归档', 'zh_cn')
+	+_('Links', '链接', 'zh_cn')
+	+_('About', '关于', 'zh_cn')
+	+_('Recent', '最新文章', 'zh_cn')
 	head
-		meta(content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name="viewport")
-		meta(content="yes", name="apple-mobile-web-app-capable")
-		meta(content="black", name="apple-mobile-web-app-status-bar-style")
-		meta(content="telephone=no", name="format-detection")
-		meta(name="renderer", content="webkit")
+		+mobile_meta()
 		meta(name="keywords", content=site.configs.keywords.escaped)
 		meta(name="description", content=site.raw_content.escaped)
 		block title
 			title= request.args.s or post.title or tags.join('+') or category.title or site.title
-		load('/template/style.scss')
-	body.clearfix
-		header#header.clearfix
-			.container
-				.col-group
-					.site-name
-						if request.path == '/'
-							h1= site.title
-						a#logo(href='/')= site.title
-						p.description= site.raw_content
-					nav#nav-menu.clearfix
-						<a href="/"  {% if request.path != '/about.md' and request.path != '/archive' %}class="current"{% endif %}>首页</a>
-						<a href="/archive"  {% if request.path == '/archive' %}class="current"{% endif %}>归档</a>
-						if has('images')
-							a(href='/album') 相册
-							if not has('posts')
-								+redirect('/album')
-						if has('links.md')
-			                <a href="/links.md" {% if request.path == '/links.md' %}class="current"{% endif %}>链接</a>
-						if has('about.md')
-			                <a href="/about.md" {% if request.path == '/about.md' %}class="current"{% endif %}>关于</a>
+		+get_resource("blog_basic.css")
+		+load('pure#0.5.0')
+		+load('/service/static_3rd/staticfile/ajax/libs/pure/0.5.0/grids-responsive-min.css')
+		+load('/template/style.scss')
+	body:.body_container
+		#header
+			.site-name
+				h1.hidden= site.title
+				a#logo(href='/')= site.title
+				p.description= site.raw_content
+			#nav-menu
+				+a_with_selected('/' or '/post', _('Blog'),'nav_blog')
+				if has('categories')
+					+a_with_selected('/categories', _('Categories'))
+				+a_with_selected('/archive', _('Archive'))
+				for p in get_data(status='pages', type='post', limit=5, with_page=False, sort='position')
+					+a_with_selected('/'+p.path, _(p.filename.split('.')[0].title()))
+				if has('images')
+					a(href='/album')= _('Albums')
+					if not has('posts')
+						+redirect('/album')
 
-		section#layout
-			.container
-				.col-group
-					#main.col-8
-						.res-cons
-							block content
+		#layout.pure-g
+			.pure-u-1.pure-u-md-3-4:.content_container
+				block content
 
-					#secondary
-						include include/sider
+			.pure-u-1-4:#sidebar
+				.widget
+					form#search
+						input#search_value.text(placeholder="Search",type="text",value=request.args.s, onkeyup="if (event.keyCode == 13) search();")
+				.widget
+					.widget-title= _('Recent')
+					newess_posts = get_data(path='/', type='post', limit=8, sort='desc', with_page=False)
+					ul
+						for post in newess_posts
+							li
+								a(href=post.url, title=post.title)= post.title
 
-		footer#footer
-			.container= '© '
-				a(href='/', real="nofollow")= site.title
-				. Powered by <a rel="nofollow" target="_blank" href="https://www.farbox.com">farbox</a>. Theme by <a rel="nofollow" target="_blank" href="http://chopstack.com">cho</a>
-		+load('jquery, /template/scripts.coffee')
+		#footer= '© '
+			a(href='/', real="nofollow")= site.title
+			. Powered by
+			a(rel="nofollow", target="_blank", href="https://www.farbox.com") FarBox
+			. Theme by
+			a(rel="nofollow", target="_blank", href="http://chopstack.com") cho
+
+		script
+			function search() {
+				if (document.getElementById('search_value').value) {
+				  location.href = 'http://' + location.host + '?s=' + document.getElementById('search_value').value;
+				}
+				return false;
+			 }

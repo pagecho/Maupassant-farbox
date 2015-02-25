@@ -4,7 +4,6 @@ if request.path.startswith('/pages')
 block title
 	title= post.title
 block content
-	article.post.post-page
-		header
-			h1.post-title= post.title
-		section.post-content= post.content
+	.post.post-page
+		h1.post-title= post.title
+		.post-content= post.content

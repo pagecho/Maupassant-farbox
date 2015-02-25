@@ -1,6 +1,8 @@
++_('Previous', '上一页', 'zh_cn')
++_('Next', '下一页', 'zh_cn')
 if paginator.has_pre or paginator.has_next
-	.page-navigator.clearfix
+	.page-navigator
 		if paginator.has_pre
-			a.pre.rounde(href=paginator.pre_url) 上一页
+			a.pre(href=paginator.pre_url)= _('Previous')
 		if paginator.has_next
-			a.round.next(href=paginator.next_url) 下一页
+			a.next(href=paginator.next_url)= _('Next')

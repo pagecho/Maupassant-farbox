@@ -4,16 +4,18 @@ block title
 	title= post.title + " - " + site.title
 
 block content
-		article.post.post-page
-			header
-				h1.post-title= post.title
-			date.post-meta= post.date.format('%B %d, %Y')
-			section.post-content= post.content
-			if post.tags
-					footer
-						.tags
-							for tag in post.tags
-								a(href="/tag/{{tag}}")= tag
-				
-			include include/comments.jade
+	.post.post-page
+		h1.post-title= post.title
+		.post-meta= post.date.format('%B %d, %Y')
+		.post-content= post.content
+		if post.tags
+			.tags
+				for tag in post.tags
+					a(href="/tag/{{tag}}")= tag
 
+		include include/comments.jade
+	script 
+		function addClass1(ele,cls) {
+		  ele.className = cls;
+		}
+		addClass1(document.getElementById("nav_blog"), "current"); 
