@@ -8,6 +8,6 @@ block content
 				ul.listing
 					for post in posts
 						li
-							span.date= post.date.format("%Y/%m/%d")
+							span.date= post.date.format("%m月%d日")
 							a(href=post.url, title=post.title)= post.title
 	include include/paginator.jade

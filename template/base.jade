@@ -24,7 +24,7 @@ html
 				a#logo(href='/')= site.title
 				p.description= site.raw_content
 			#nav-menu
-				+a_with_selected('/' or '/post', _('Blog'),'nav_blog')
+				+a_with_selected('/', _('Blog'), dom_id='nav_blog')
 				if has('categories')
 					+a_with_selected('/categories', _('Categories'))
 				+a_with_selected('/archive', _('Archive'))
@@ -36,10 +36,10 @@ html
 						+redirect('/album')
 
 		#layout.pure-g
-			.pure-u-1.pure-u-md-3-4:.content_container
+			.pure-u-1.pure-u-md-17-24:.content_container
 				block content
 
-			.pure-u-1-4:#sidebar
+			.pure-u-7-24:#sidebar
 				.widget
 					form#search
 						input#search_value.text(placeholder="Search",type="text",value=request.args.s, onkeyup="if (event.keyCode == 13) search();")
@@ -51,12 +51,12 @@ html
 							li
 								a(href=post.url, title=post.title)= post.title
 
-		#footer= '© '
+		#footer= '© 2015 '
 			a(href='/', real="nofollow")= site.title
-			. Powered by
-			a(rel="nofollow", target="_blank", href="https://www.farbox.com") FarBox
-			. Theme by
-			a(rel="nofollow", target="_blank", href="http://chopstack.com") cho
+			.
+			
+
+		+load('/template/duoshuo.css')
 
 		script
 			function search() {

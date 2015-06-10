@@ -1,0 +1,13 @@
+extends base
+if request.path.startswith('/about')
+	post = get_doc('about.md') or get_doc('about.txt') or get_doc('about.mk') or get_doc('about.markdown')
+block title
+	title= " 关于 | " + site.title
+
+block content
+	.post.post-page
+		h1.post-title= "关于"
+		//.post-meta= post.date.format('%B %d, %Y')
+		.post-content= post.content
+
+	script

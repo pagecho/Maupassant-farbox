@@ -1,15 +1,18 @@
 /**
  *
  * @package Maupassant
- * @author cho
- * @version 2.0
- * @link http://chopstack.com
+ * @author qiancheng
+ * @version 2.1
+ * @link http://qiancheng.me
  */
 
 body {
 	background-color: #FFF;
 	color: #444;
-	font-family: "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
+	//font-family: "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
+	//font-family: 'PT Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, Hiragino Sans GB, Microsoft YaHei, sans-serif;
+	//font-family: "Lucida Grande", "Lucida Sans Unicode", "STHeiti", "Helvetica","Arial","Verdana","sans-serif";
+	font-family: "PingHei","Lucida Grande", "Lucida Sans Unicode", "STHeiti", "Helvetica","Arial","Verdana","sans-serif";
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 14px;
@@ -184,7 +187,7 @@ a:focus{
 			margin: 1.4em 0 1.1em;
 		}
 		pre code {
-			padding: 0 2em;
+			//padding: 0 2em;
 		}
 		p {
 			margin: 0 0 1.234em;
@@ -240,7 +243,9 @@ a:focus{
 		}
 	}
 }
-
+.post-page .post-content{
+	padding-top: 35px;
+}
 
 
 .page-navigator {
@@ -384,6 +389,28 @@ strong,b,em{
 pre{
 	margin:2em 0;
 }
-.hidden1{
+.hidden2{
 	display: none;
+}
+.center{
+	clear:both;
+	marigin: 0 auto;
+	text-align: center;
+}
+.search-bar{
+	position: relative;
+	margin-bottom: 50px;
+	overflow: hidden;
+	input {
+		padding: 12px 30px 11px 15px;
+		line-height: 1.5;
+		font-size: 1.5em;
+		border:1px solid #ddd;
+		width:100%;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		outline:none;
+	}
+
 }
